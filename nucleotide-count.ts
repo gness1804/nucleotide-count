@@ -11,7 +11,12 @@ export function nucleotideCounts(strand: string): NucleotideCount {
   };
 
   if (!strand) return res;
-  strand.split('').forEach((letter) => {
+
+  const strandArr = strand.split('');
+
+  if (!!strandArr.find(letter => !['A', 'C', 'G', 'T'].includes(letter))) throw new Error('Invalid nucleotide in strand');
+
+  strandArr.forEach((letter) => {
     res[letter] = res[letter] + 1;
   })
   return res;
